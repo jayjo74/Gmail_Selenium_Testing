@@ -120,14 +120,36 @@ public class Gmail_Testing {
 //6.Click Send
         WebElement SendButton = driver.findElement(By.cssSelector("div[aria-label^='Send'][role='button']"));
         // div[aria-label^='Send'] - value start with Send
+        // div[aria-label*=\"Send\"] - value Contain text Send
         SendButton.click();
 
 //7.Click Inbox
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText("Inbox")));
+        WebElement InboxButton = driver.findElement(By.partialLinkText("Inbox"));
+        InboxButton.click();
+
 //8.Click email
+//        <b> is bold <span> devide use line <div> devide use block
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[Class='y6'] span[id] b")));
+        WebElement EmailClick = driver.findElement(By.cssSelector("div[Class='y6'] span[id] b"));
+        EmailClick.click();
+
 //9.Verify the email subject and email body is correct
+//        The <h1> to <h6> tags are used to define HTML headings.
+//        <h1> defines the most important heading. <h6> defines the least important heading.
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h2[class='hP']")));
+        WebElement SubjectCheckTextBox = driver.findElement(By.cssSelector("h2[class='hP']"));
+        Assert.assertEquals("Email subject text should be the same",SubjectText,SubjectCheckTextBox.getText());
+
+        WebElement EmailBodyCheckTextBox = driver.findElement(By.cssSelector("div[class='ii gt adP adO'] div div[dir='ltr']"));
+        Assert.assertEquals("Email body text should be the same",EmailBodyText,EmailBodyCheckTextBox.getText());
+
 //10.Sign out
+        WebElement userChangeButton = driver.findElement(By.cssSelector("span[class='gb_3a gbii']"));
+        userChangeButton.click();
 
-
+        WebElement sighOutButton = driver.findElement(By.linkText("Sign out"));
+        sighOutButton.click();
 
     }
 
